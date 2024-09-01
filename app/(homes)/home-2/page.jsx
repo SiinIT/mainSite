@@ -15,12 +15,20 @@ import Cta from "@/components/homes/home-3/Cta";
 import Footer5 from "@/components/footers/Footer5";
 import MarqueeComponent from "@/components/common/Marquee";
 import Steps from "@/components/homes/home-5/Steps";
+import { getCourses } from "@/sanity/sanity-utils";
 
 
 export const metadata = {
   title: "Home 2 || Frisk - Creative Agency & Portfolio Nextjs Template",
 };
-export default function HomePage2() {
+
+
+export default async function HomePage2() {
+
+  const courses = await getCourses();
+
+  console.log(courses)
+
   return (
     <>
       <SearchPopup />
@@ -33,7 +41,7 @@ export default function HomePage2() {
       <Steps/>
       <Awards />
       <Video />
-      <Blogs />
+      <Blogs courses={courses} />
       <Clients />
       <Cta />
       <Footer5 />
