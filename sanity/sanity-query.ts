@@ -18,4 +18,3 @@ export const courseQueryBySlug = groq`*[_type == "course" && slug.current == $sl
 
 //Lessons query
 
-export const lessonsQueryByCourseSlug = groq
