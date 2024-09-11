@@ -6,35 +6,33 @@ import Nav from "./component/Nav";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-export default function Header2() {
+
+export default function Header2({ sticky }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   useEffect(() => {
     const handleDocumentClick = (event) => {
       const menuWrapper = document.querySelector(".mobile-menu-wrapper");
       const menuContainer = document.querySelector(".mobile-menu-area");
 
-      // Check if the click is outside of modal-content but inside modal-dialog
       if (
         menuWrapper &&
         menuContainer &&
         !menuContainer.contains(event.target) &&
         menuWrapper.contains(event.target)
       ) {
-        // Your logic for handling the click outside modal-content
         setMobileMenuOpen(false);
       }
     };
 
-    // Attach the event listener when the component mounts
     document.addEventListener("click", handleDocumentClick);
 
-    // Detach the event listener when the component unmounts
     return () => {
       document.removeEventListener("click", handleDocumentClick);
     };
-  }, []); // Empty dependency array ensures the effect runs once after the initial render
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,24 +40,26 @@ export default function Header2() {
       setIsScrolled(scrollPosition > 500);
     };
 
-    // Attach the event listener when the component mounts
     window.addEventListener("scroll", handleScroll);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  // Condiziona l'aggiunta della classe header-sticky in base alla prop sticky e isScrolled
+
+  console.log(sticky)
+
+  const stickyClass = sticky ?  "header-sticky" : (isScrolled ? "header-sticky" : "");
+
   return (
     <>
       <SideMenu isOpen={isOpen} setIsOpen={setIsOpen} />
 
       {/* Mobile Menu */}
-
       <div
-        className={`mobile-menu-wrapper ${
-          mobileMenuOpen ? "body-visible" : ""
-        } `}
+        className={`mobile-menu-wrapper ${mobileMenuOpen ? "body-visible" : ""}`}
       >
         <div className="mobile-menu-area">
           <button
@@ -102,9 +102,8 @@ export default function Header2() {
       </div>
 
       {/* Header Area */}
-
       <header className="nav-header header-layout2">
-        <div className={`sticky-wrapper ${isScrolled ? "header-sticky" : ""} `}>
+        <div className={`sticky-wrapper ${stickyClass}`}>
           {/* Main Menu Area  */}
           <div className="menu-area">
             <div className="container-fluid">
@@ -124,7 +123,6 @@ export default function Header2() {
                 <div className="col-auto ms-auto">
                   <nav className="main-menu d-none d-lg-inline-block">
                     <ul>
-                      {" "}
                       <Nav />
                     </ul>
                   </nav>
@@ -158,8 +156,8 @@ export default function Header2() {
                         alt="icon"
                       />
                       <span className="link-effect">
-                        <span className="effect-1">SEARCH</span>
-                        <span className="effect-1">SEARCH</span>
+                        <span className="effect-1">CERCA</span>
+                        <span className="effect-1">CERCA</span>
                       </span>
                     </button>
                   </div>

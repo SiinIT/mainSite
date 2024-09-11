@@ -27,8 +27,6 @@ export default async function HomePage2() {
 
   const courses = await getCourses();
 
-  console.log(courses)
-
   return (
     <>
       <SearchPopup />

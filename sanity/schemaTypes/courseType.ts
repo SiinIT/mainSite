@@ -34,11 +34,11 @@ export const courseType = defineType({
     }),
     defineField({
       name: 'whatWillYouLearn',
-      type: 'text',
+      type: 'blockContent',
     }),
     defineField({
       name: 'description',
-      type: 'text',
+      type: 'blockContent',
     }),
   ],
 })
