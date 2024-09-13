@@ -1,15 +1,10 @@
-import Image from "next/image";
-import Link from "next/link";
 import Breadcumb from "./Breadcumb";
 import RenderBodyContent from "./RenderBodyContent";
-import LectureList from "../lecture/components/LectureList"
-import { notFound } from 'next/navigation'
+import LectureList from "../lesson/[lesson_slug]/components/LectureList"
 
 export default async function CourseDetails({ course }) {
 
-  console.log(course);
-
-  const { title, slug, whatWillYouLearn, description, mainImage } = course;
+  const { title, slug, whatWillYouLearn, description, mainImage, lessons } = course;
   
   return (
     <div className="project-details-page-area">
@@ -51,8 +46,7 @@ export default async function CourseDetails({ course }) {
           </div>
           <div className="col-lg-12">
           <h3 className="mt-35">Lezioni</h3>
-            <p className="sec-text mb-n1">
-            </p>
+            <LectureList course_slug={slug.current} lectures={lessons} />
           </div>
         </div>
       </div>

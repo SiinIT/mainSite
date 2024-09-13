@@ -24,13 +24,16 @@ export const lessonType = defineType({
       to: {type: 'author'},
     }),
     defineField({
-      name: 'categories',
-      type: 'array',
-      of: [defineArrayMember({type: 'reference', to: {type: 'course'}})],
+      name: 'course',
+      type: 'reference',
+      to: {type: 'course'},
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'publishedAt',
       type: 'datetime',
+      initialValue: () => new Date().toISOString(),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'body',

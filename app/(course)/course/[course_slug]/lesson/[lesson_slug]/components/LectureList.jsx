@@ -2,7 +2,7 @@ import { faqs3 } from "@/data/faq";
 import React from "react";
 import Link from "next/link";
 
-export default function ({ lectures }) {
+export default function ({ course_slug, lectures }) {
   
   return (
     <div className="faq-area-1 mt-5 overflow-hidden">
@@ -10,7 +10,7 @@ export default function ({ lectures }) {
         <div className="row">
           <div className="col-xl-8">
             <div className="accordion-area accordion">
-              {lectures.data.map((elm, i) => (
+              {lectures.map((elm, i) => (
                   <div key={i} className="accordion-card">
                     <div
                       className="accordion-header"
@@ -18,7 +18,7 @@ export default function ({ lectures }) {
                     >
                       <Link
                         scroll={false}
-                        href={`/course/${elm.id}`}
+                        href={`/course/${course_slug}/lesson/${elm.slug.current}`}
                       >
                         <button
                           className='accordion-button'
@@ -28,7 +28,7 @@ export default function ({ lectures }) {
                           <span className="faq-number">
                             {i.toString.length > 1 ? i : "0" + (i + 1)}
                           </span>{" "}
-                          {elm.attributes.title}
+                          {elm.title}
                         </button>
                       </Link>
                     </div>

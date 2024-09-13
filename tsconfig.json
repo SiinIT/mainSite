@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "app/(course)/course/[slug]/components/RenderBodyContent.jsx"  ],
+, "app/(course)/course/[course_slug]/components/RenderBodyContent.jsx"  ],
   "exclude": [
     "node_modules"
   ]

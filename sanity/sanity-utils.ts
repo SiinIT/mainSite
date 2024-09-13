@@ -1,7 +1,7 @@
 import ImageUrlBuilder from "@sanity/image-url";
 import { createClient, type QueryParams } from "next-sanity";
 import clientConfig from "./config/client-config";
-import { courseQuery, courseQueryBySlug } from "./sanity-query";
+import { courseQuery, courseQueryBySlug, lessonQueryBySlug } from "./sanity-query";
 
 export const client = createClient(clientConfig);
 
@@ -42,6 +42,16 @@ export const getCourses = async () => {
 export const getCourseBySlug = async (slug: string) => {
   const data = await sanityFetch({
     query: courseQueryBySlug,
+    qParams: { slug },
+    tags: ["post", "author", "category"],
+  });
+
+  return data;
+};
+
+export const getLessonBySlug = async (slug: string) => {
+  const data = await sanityFetch({
+    query: lessonQueryBySlug,
     qParams: { slug },
     tags: ["post", "author", "category"],
   });
