@@ -17,7 +17,7 @@ export const courseQuery = groq`*[_type == "course"]{title,slug,mainImage}`;
 export const courseQueryBySlug = groq`
   *[_type == "course" && slug.current == $slug][0]{
     ...,
-    "lessons": *[_type == "lesson" && references(^._id)]{
+    "lessons": *[_type == "lesson" && references(^._id)] | order(publishedAt asc){
       title,
       slug,
       author->{
